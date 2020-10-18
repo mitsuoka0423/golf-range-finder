@@ -1,12 +1,33 @@
-import Head from "next/head";
-import styles from "../styles/Main.module.css";
-import Map from "../components/molucules/Map";
+import React, {useState, useEffect} from 'react';
+import Head from 'next/head';
+import styles from '../styles/Main.module.css';
+import {getCurrentPositionPromise} from 'geolocation-promise';
+import Map from '../components/molucules/Map';
 
-export default function Home() {
+/**
+ * @return {*} Main Component
+ */
+export default function Main() {
+  const [position, setPosition] = useState({
+    lat: 35.6809591,
+    lng: 139.7673068,
+  });
+
+  useEffect(() => {
+    getCurrentPositionPromise().then((current) => {
+      console.log(current);
+
+      setPosition({
+        lat: current.latitude,
+        lng: current.longitude,
+      });
+    });
+  }, []);
+
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>golf range finder</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

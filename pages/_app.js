@@ -1,8 +1,13 @@
-import '../styles/globals.css'
-import '../styles/reset.css'
+import React from 'react';
+import '../styles/globals.css';
+import '../styles/reset.css';
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+/**
+ * @param {*} param0 params
+ * @return {*} MyApp Component
+ */
+function MyApp({Component, pageProps}) {
+  return <Component {...pageProps} />;
 }
 
-export default MyApp
+export default MyApp;
