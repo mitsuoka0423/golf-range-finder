@@ -1,0 +1,28 @@
+.container {
+  max-height: 100vh;
+}
+
+.header {
+  width: 100vw;
+  height: 80px;
+  border-bottom: solid 1px;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+
+.main {
+}
+
+.medium {
+  font-size: 20px;
+}
+
+.large {
+  font-size: 32px;
+}
+
+.range {
+  width: 100%;
+  text-align: center;
+}
