@@ -39,9 +39,9 @@ function initMap() {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         };
-        // map.setCenter(pos);
-        // markerCurrentPosition.setPosition(pos);
-        // current = pos;
+        map.setCenter(pos);
+        markerCurrentPosition.setPosition(pos);
+        current = pos;
       },
       () => {
         handleLocationError(true);
