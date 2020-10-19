@@ -13,21 +13,19 @@ function initMap() {
   });
 
   if (navigator.geolocation) {
-    setInterval(() => {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          };
-          map.setCenter(pos);
-          marker.setPosition(pos);
-        },
-        () => {
-          handleLocationError(true, infoWindow, map.getCenter());
-        }
-      );
-    }, 3000);
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+        map.setCenter(pos);
+        marker.setPosition(pos);
+      },
+      () => {
+        handleLocationError(true, infoWindow, map.getCenter());
+      }
+    );
   } else {
     handleLocationError(false, infoWindow, map.getCenter());
   }
