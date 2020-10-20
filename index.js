@@ -58,5 +58,15 @@ function handleLocationError(browserHasGeolocation) {
 }
 
 function calcDistanceByYard(current, target) {
-  return Math.floor(Math.random() * 300);
+  lat1 = current.lat * Math.PI / 180;
+  lng1 = current.lng * Math.PI / 180;
+  lat2 = target.lat() * Math.PI / 180;
+  lng2 = target.lng() * Math.PI / 180;
+  console.log({
+    lat1,
+    lng1,
+    lat2,
+    lng2,
+  });
+  return Math.floor(6371 * Math.acos(Math.cos(lat1) * Math.cos(lat2) * Math.cos(lng2 - lng1) + Math.sin(lat1) * Math.sin(lat2)) * 1000 * 1.09361);
 }
