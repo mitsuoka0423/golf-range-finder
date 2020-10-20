@@ -1,5 +1,12 @@
 {
   "name": "RangeFinder",
   "description": "現在地からタップした地点までの距離を測ります",
-  "display": "standalone"
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "icon/icon256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }
+  ]
 }
