@@ -1,6 +1,6 @@
 let map, markerCurrentPosition, markerTappedPosition;
 
-const defaultCenter = { lat: 35.649218, lng: 139.5255548 };
+const defaultCenter = { lat: 35.64889549961588, lng: 139.52722910198986 };
 let current = JSON.parse(JSON.stringify(defaultCenter));
 
 const distanceElement = document.getElementById("distance");
@@ -15,7 +15,11 @@ function initMap() {
   map.addListener("click", ({latLng}) => {
     console.log("map is tapped!");
     console.log({latLng});
-    
+    console.log({
+      lat: latLng.lat(),
+      lng: latLng.lng(),
+    })
+
     if (markerTappedPosition) {
       markerTappedPosition.setMap(null);
     }
@@ -39,9 +43,9 @@ function initMap() {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         };
-        map.setCenter(pos);
-        markerCurrentPosition.setPosition(pos);
-        current = pos;
+        // map.setCenter(pos);
+        // markerCurrentPosition.setPosition(pos);
+        // current = pos;
       },
       () => {
         handleLocationError(true);
