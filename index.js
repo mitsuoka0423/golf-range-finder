@@ -58,5 +58,5 @@ function handleLocationError(browserHasGeolocation) {
 }
 
 function calcDistanceByYard(current, target) {
-  return Math.random();
+  return Math.floor(Math.random() * 300);
 }
