@@ -2,6 +2,7 @@
   "name": "RangeFinder",
   "description": "現在地からタップした地点までの距離を測ります",
   "display": "standalone",
+  "background_color": "#eee",
   "icons": [
     {
       "src": "icon/icon256.png",
