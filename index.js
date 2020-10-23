@@ -40,6 +40,7 @@ function initMap() {
   getGeolocation();
 
   hereButton.addEventListener('click', () => {
+    clear();
     getGeolocation();
   })
 }
@@ -83,4 +84,10 @@ function calcDistanceByYard(current, target) {
     lng2,
   });
   return Math.floor(6371 * Math.acos(Math.cos(lat1) * Math.cos(lat2) * Math.cos(lng2 - lng1) + Math.sin(lat1) * Math.sin(lat2)) * 1000 * 1.09361);
+}
+
+function clear() {
+  if (markerTappedPosition) {
+    markerTappedPosition.setMap(null);
+  }
 }
