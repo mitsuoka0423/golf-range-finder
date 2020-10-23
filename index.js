@@ -90,4 +90,5 @@ function clear() {
   if (markerTappedPosition) {
     markerTappedPosition.setMap(null);
   }
+  distanceElement.innerHTML = 0;
 }
