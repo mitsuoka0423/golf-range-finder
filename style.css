@@ -33,6 +33,24 @@ header {
   background: rgba(255, 255, 255, 0.95);
 }
 
+footer {
+  position: absolute;
+  z-index: 2;
+  bottom: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 16px;
+
+  display: flex;
+  align-items: center;
+
+  font-size: 10px;
+
+  background: black;
+  color: white;
+}
+
 .text-normal {
   font-size: 20px;
 }
