@@ -58,3 +58,21 @@ footer {
 .text-large {
   font-size: 32px;
 }
+
+.here {
+  position: absolute;
+  z-index: 2;
+  bottom: 100px;
+  left: 10px;
+
+  width: 40px;
+  height: 40px;
+
+  background: white;
+  border: none;
+}
+
+.here-icon {
+  width: 24px;
+  height: 24px;
+}

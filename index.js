@@ -4,6 +4,7 @@ const defaultCenter = { lat: 35.64889549961588, lng: 139.52722910198986 };
 let current = JSON.parse(JSON.stringify(defaultCenter));
 
 const distanceElement = document.getElementById("distance");
+const hereButton = document.getElementById("here");
 
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
@@ -36,6 +37,15 @@ function initMap() {
     map: map,
   });
 
+  getGeolocation();
+
+  hereButton.addEventListener('click', () => {
+    getGeolocation();
+  })
+}
+
+function getGeolocation() {
+  console.log('start getGeolocation');
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
