@@ -91,6 +91,11 @@ function handleLocationError(browserHasGeolocation) {
 }
 
 function calcDistanceByYard(current, target) {
+
+  if (!current.lat || !current.lng || !target.lat || !target.lng) {
+    return 0;
+  }
+
   lat1 = current.lat * Math.PI / 180;
   lng1 = current.lng * Math.PI / 180;
   lat2 = target.lat * Math.PI / 180;
