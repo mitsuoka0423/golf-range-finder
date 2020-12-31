@@ -1,4 +1,6 @@
 let map, markerCurrentPosition, markerTappedPosition;
+const currentPosition = { lat: 35.64889549961588, lng: 139.52722910198986 };
+const tappedPosition = { lat: null, lng: null };
 
 const defaultCenter = { lat: 35.64889549961588, lng: 139.52722910198986 };
 let current = JSON.parse(JSON.stringify(defaultCenter));
@@ -15,11 +17,12 @@ function initMap() {
   map.setTilt(0);
   map.addListener("click", ({latLng}) => {
     console.log("map is tapped!");
-    console.log({latLng});
     console.log({
       lat: latLng.lat(),
       lng: latLng.lng(),
     })
+    tappedPosition.lat = latLng.lat();
+    tappedPosition.lng = latLng.lng();
 
     if (markerTappedPosition) {
       markerTappedPosition.setMap(null);
@@ -27,14 +30,26 @@ function initMap() {
     markerTappedPosition = new google.maps.Marker({
       position: latLng,
       map: map,
+      draggable:true,
+    });
+    markerTappedPosition.addListener("dragend", function ({ latLng }) {
+      tappedPosition.lat = latLng.lat();
+      tappedPosition.lng = latLng.lng();
+      distanceElement.innerHTML = calcDistanceByYard(currentPosition, tappedPosition);
     });
 
-    distanceElement.innerHTML = calcDistanceByYard(current, latLng);
+    distanceElement.innerHTML = calcDistanceByYard(current, tappedPosition);
   });
 
   markerCurrentPosition = new google.maps.Marker({
     position: defaultCenter,
     map: map,
+    draggable:true,
+  });
+  markerCurrentPosition.addListener("dragend", function ({ latLng }) {
+    currentPosition.lat = latLng.lat();
+    currentPosition.lng = latLng.lng();
+    distanceElement.innerHTML = calcDistanceByYard(currentPosition, tappedPosition);
   });
 
   getGeolocation();
@@ -75,8 +90,8 @@ function handleLocationError(browserHasGeolocation) {
 function calcDistanceByYard(current, target) {
   lat1 = current.lat * Math.PI / 180;
   lng1 = current.lng * Math.PI / 180;
-  lat2 = target.lat() * Math.PI / 180;
-  lng2 = target.lng() * Math.PI / 180;
+  lat2 = target.lat * Math.PI / 180;
+  lng2 = target.lng * Math.PI / 180;
   console.log({
     lat1,
     lng1,
