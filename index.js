@@ -1,9 +1,8 @@
 let map, markerCurrentPosition, markerTappedPosition;
-const currentPosition = { lat: 35.64889549961588, lng: 139.52722910198986 };
 const tappedPosition = { lat: null, lng: null };
 
 const defaultCenter = { lat: 35.64889549961588, lng: 139.52722910198986 };
-let current = JSON.parse(JSON.stringify(defaultCenter));
+let currentPosition = JSON.parse(JSON.stringify(defaultCenter));
 
 const distanceElement = document.getElementById("distance");
 const hereButton = document.getElementById("here");
@@ -32,13 +31,9 @@ function initMap() {
       map: map,
       draggable:true,
     });
-    markerTappedPosition.addListener("dragend", function ({ latLng }) {
-      tappedPosition.lat = latLng.lat();
-      tappedPosition.lng = latLng.lng();
-      distanceElement.innerHTML = calcDistanceByYard(currentPosition, tappedPosition);
-    });
+    markerTappedPosition.addListener("dragend", callbackDragEndTappedPosition);
 
-    distanceElement.innerHTML = calcDistanceByYard(current, tappedPosition);
+    distanceElement.innerHTML = calcDistanceByYard(currentPosition, tappedPosition);
   });
 
   markerCurrentPosition = new google.maps.Marker({
@@ -46,11 +41,7 @@ function initMap() {
     map: map,
     draggable:true,
   });
-  markerCurrentPosition.addListener("dragend", function ({ latLng }) {
-    currentPosition.lat = latLng.lat();
-    currentPosition.lng = latLng.lng();
-    distanceElement.innerHTML = calcDistanceByYard(currentPosition, tappedPosition);
-  });
+  markerCurrentPosition.addListener("dragend", callbackDragEndCurrentPosition);
 
   getGeolocation();
 
@@ -59,6 +50,18 @@ function initMap() {
     getGeolocation();
   })
 }
+
+function callbackDragEndCurrentPosition({ latLng }) {
+  currentPosition.lat = latLng.lat();
+  currentPosition.lng = latLng.lng();
+  distanceElement.innerHTML = calcDistanceByYard(currentPosition, tappedPosition);
+};
+
+function callbackDragEndTappedPosition({ latLng }) {
+  tappedPosition.lat = latLng.lat();
+  tappedPosition.lng = latLng.lng();
+  distanceElement.innerHTML = calcDistanceByYard(currentPosition, tappedPosition);
+};
 
 function getGeolocation() {
   console.log('start getGeolocation');
@@ -71,7 +74,7 @@ function getGeolocation() {
         };
         map.setCenter(pos);
         markerCurrentPosition.setPosition(pos);
-        current = pos;
+        currentPosition = pos;
       },
       () => {
         handleLocationError(true);
