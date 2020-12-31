@@ -1,5 +1,5 @@
 {
-  "name": "RangeFinder",
+  "name": "ゴルフ距離計",
   "description": "現在地からタップした地点までの距離を測ります",
   "display": "standalone"
 }
